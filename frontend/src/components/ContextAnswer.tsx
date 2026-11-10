@@ -1,0 +1,13 @@
+import {useState} from 'react';
+import {api} from '../api';
+import {ContextProposal} from './ContextProposal';
+import type {Consulting,ContextProposal as Proposal,Requirement} from '../consultingTypes';
+export function ContextAnswer({data,requirement,clientId,onChanged}:{data:Consulting;requirement:Requirement;clientId:string;onChanged:()=>void}){
+  const [text,setText]=useState('');const [proposal,setProposal]=useState<Proposal|null>(null);const [busy,setBusy]=useState(false);const [error,setError]=useState('');
+  const key=requirement.id;const supported=['expected_accounts','owners','objective','monthly_budget','cadence'].includes(key);
+  const placeholder=key==='owners'?'Una cuenta y responsable por línea: shared = Plataforma':key==='expected_accounts'?'IDs de cuentas separados por comas':key==='cadence'?'Frecuencia y retraso en días. Ejemplo: 1, 2':key==='monthly_budget'?'Importe aprobado en USD':'Tu objetivo principal';
+  async function prepare(e:React.FormEvent){e.preventDefault();setBusy(true);setError('');try{let values:Record<string,unknown>={[key]:text.trim()};if(key==='owners'){const pairs=text.split('\n').map(row=>row.split('=').map(s=>s.trim()));if(pairs.some(p=>p.length!==2||!p[0]||!p[1]))throw Error('Usa una cuenta = responsable por línea.');values={owners:{...(data.diagnosis.context.values.owners as object||{}),...Object.fromEntries(pairs)}}}if(key==='expected_accounts')values={expected_accounts:text.split(',').map(s=>s.trim()).filter(Boolean)};if(key==='monthly_budget')values={monthly_budget:Number(text)};if(key==='cadence'){const [cadence,latency]=text.split(',').map(Number);values={source_cadence_days:cadence,data_latency_days:latency}}setProposal(await api<Proposal>(`/clients/${clientId}/consulting/context/proposals`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({expected_revision:data.diagnosis.context.revision,values,reason:'Respuesta explícita del usuario desde su siguiente acción.'})}))}catch(e){setError((e as Error).message)}finally{setBusy(false)}}
+  if(!supported)return <p>Este requisito necesita revisar la fuente o aportar evidencia adicional. Continúa con «Resolver en el chat» para identificar el dato concreto; la configuración de archivos está en Conexiones.</p>;
+  if(proposal)return <ContextProposal proposal={proposal} clientId={clientId} onChanged={onChanged}/>;
+  return <form className="consult-answer" onSubmit={prepare}><label>{requirement.question}<textarea required rows={2} maxLength={2000} value={text} onChange={e=>setText(e.target.value)} placeholder={placeholder}/></label>{error&&<p className="error" role="alert">{error}</p>}<button className="secondary" disabled={busy||!text.trim()}>{busy?'Preparando…':'Revisar respuesta'}</button></form>;
+}

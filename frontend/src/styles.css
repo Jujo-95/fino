@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;450;500;550;600;650;700&display=swap');
+@import './styles/base.css';
+@import './styles/shell.css';
+@import './styles/dashboard.css';
+@import './styles/views.css';
+@import './styles/consulting.css';
+@import './styles/responsive.css';
+@import './styles/audit.css';
+
+@import './styles/disclosure.css';
+
+@import "./styles/chat.css";
+
+@import './styles/team.css';
+
+@import './styles/chat-reading.css';
+
+@import "./styles/provider-reports.css";
+
+@import './styles/tasks.css';
+
+@import './styles/ticket-threads.css';
+
+@import './styles/chat-columns.css';
+
+@import './styles/task-toolbar.css';
+@import './styles/ticket-pulse.css';
+@import './styles/task-progress.css';
+@import './styles/ticket-workbench.css';
+@import './styles/ticket-record.css';
+@import './styles/chat-receipts.css';
+@import './styles/connections.css';
+
+@import './styles/fino-workspace.css';
+@import './styles/chat-theme.css';
+@import './styles/ticket-list-rows.css';
+@import './styles/ticket-list-layout.css';
+
+.sidebar nav a{text-decoration:none;font:inherit}
+
+.task-row a.task-open,.task-row a.task-identity{text-decoration:none;color:inherit}

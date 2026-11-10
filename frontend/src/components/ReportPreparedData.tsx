@@ -1,0 +1,10 @@
+import {useEffect,useState} from 'react';
+import {api,download} from '../api';
+import {JsonBlock} from './QueryAudit';
+type Snapshot={snapshot_id:string;run_id:string;created_at_utc:string};
+export function ReportPreparedData({clientId,runId}:{clientId:string;runId:string}){
+  const [open,setOpen]=useState(false);const [snapshots,setSnapshots]=useState<Snapshot[]|null>(null);const [selected,setSelected]=useState<unknown>(null);const [error,setError]=useState('');const [busy,setBusy]=useState(false);
+  useEffect(()=>{if(!open)return;let active=true;api<Snapshot[]>(`/clients/${clientId}/scripts?run_id=${encodeURIComponent(runId)}`).then(rows=>{if(active)setSnapshots(rows)}).catch(e=>{if(active)setError(e.message)});return()=>{active=false}},[clientId,runId,open]);
+  async function read(snapshot:Snapshot){setBusy(true);setError('');try{setSelected(await api(`/clients/${clientId}/scripts/${snapshot.snapshot_id}`))}catch(e){setError((e as Error).message)}finally{setBusy(false)}}
+  return <details className="disclosure" onToggle={e=>setOpen(e.currentTarget.open)}><summary>Datos utilizados en este informe</summary><div className="disclosure-content"><p>Mediciones conservadas para esta ejecución. Son evidencia del informe, no un informe adicional.</p>{error&&<p role="alert" className="error">{error}</p>}{!snapshots?<p>{error?'No se pudieron consultar los datos.':'Abre esta sección para consultar la evidencia.'}</p>:!snapshots.length?<p>Esta ejecución no registró un paquete de mediciones en este formato. Las consultas y demás evidencias siguen disponibles en la auditoría.</p>:snapshots.map((snapshot,i)=><button className="secondary" disabled={busy} key={snapshot.snapshot_id} onClick={()=>void read(snapshot)}>{busy?'Consultando…':`Ver mediciones ${i+1}`}</button>)}{selected!==null&&<><button className="text-button" onClick={()=>download(`mediciones-${runId}.json`,JSON.stringify(selected,null,2),'application/json')}>Descargar evidencia</button><JsonBlock value={selected}/></>}</div></details>;
+}

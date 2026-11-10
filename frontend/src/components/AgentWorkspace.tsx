@@ -1,0 +1,13 @@
+import {useState,useEffect} from 'react';
+import {SpecialistDefinition} from './SpecialistDefinition';
+import {V2Evidence} from './V2Evidence';
+import {ChatPanel} from './ChatPanel';
+import type {ChatController} from '../hooks/useChat';
+import {TicketDialog} from '../views/TicketsView';
+import type {TicketChatSummary} from '../chatTypes';
+import type {Ticket} from '../types';
+export function AgentWorkspace({chat,clientId,agentId,tickets,ticketRefs,onChanged,children,onOpenReports,onTicketThread,ticketThreads,specialistId,onClearSpecialist,onAskSpecialist,draftRequest}:{specialistId?:string|null;onClearSpecialist?:()=>void;onAskSpecialist?:(text:string)=>void;draftRequest?:{text:string;nonce:number};chat:ChatController;clientId:string;agentId:string;tickets:Ticket[];ticketRefs:string[];onChanged:()=>void;children:React.ReactNode;onOpenReports?:(id:string)=>void;onTicketThread?:(id:string)=>void;ticketThreads?:TicketChatSummary[]}){
+  const [evidence,setEvidence]=useState(false);const [selected,setSelected]=useState<Ticket|null>(null);const [refs,setRefs]=useState<string[]>([]);
+  useEffect(()=>setEvidence(false),[chat.thread?.thread_id]);
+  return <><section id="audit-agent-detail" tabIndex={-1} className="panel agent-chat-workspace"><ChatPanel ticketThreads={ticketThreads} onOpenReports={onOpenReports} draftRequest={draftRequest} hidden={evidence||!!specialistId} headerAction={<button className="text-button agent-evidence-toggle" onClick={()=>setEvidence(true)}>Aporte al informe y evidencia</button>} chat={chat} key={clientId+agentId} clientId={clientId} agentId={agentId} tickets={tickets} ticketRefs={[...new Set([...ticketRefs,...refs])]} onTicket={id=>onTicketThread?onTicketThread(id):setSelected(tickets.find(t=>t.ticket_id===id)||null)}/>{specialistId&&<SpecialistDefinition agentId={specialistId} onBack={()=>{setEvidence(false);onClearSpecialist?.()}} onAsk={text=>{setEvidence(false);onAskSpecialist?.(text)}}/>}{evidence&&!specialistId&&<div className="agent-evidence-view"><header className="chat-heading"><h2>Aporte al informe y evidencia</h2><button className="text-button" onClick={()=>setEvidence(false)}>Volver al chat</button></header><div className="agent-evidence-content">{agentId.startsWith('v2-')?<V2Evidence thread={chat.thread} agentId={agentId}/>:children}</div></div>}</section>{selected&&<TicketDialog key={selected.ticket_id} ticket={selected} clientId={clientId} onClose={()=>setSelected(null)} onAsk={()=>{if(onTicketThread)onTicketThread(selected.ticket_id);else setRefs([selected.ticket_id]);setSelected(null)}} onSaved={()=>{setSelected(null);onChanged()}}/>}</>;
+}

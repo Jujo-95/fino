@@ -1,0 +1,54 @@
+.ticket-workbench{width:100%;min-width:0;position:sticky;top:0}
+.ticket-workbench-heading{display:flex;align-items:center;min-height:42px;padding:9px 14px;border-bottom:1px solid var(--border);background:var(--canvas)}
+.ticket-workbench-columns{display:grid;grid-template-columns:minmax(220px,min(var(--ticket-detail-width,320px),55%)) 6px minmax(0,1fr);height:calc(100dvh - 66px);min-height:400px;min-width:0;align-items:stretch}
+.ticket-workbench-columns>*{min-width:0}
+.ticket-workbench-details{height:100%;overflow-y:auto;overscroll-behavior:contain;background:var(--surface)}
+.ticket-workbench-details .ticket-modal-content{padding:18px;min-width:0}
+.ticket-workbench-details h2{font-size:20px;line-height:1.4;margin:12px 0 18px;overflow-wrap:anywhere}
+.ticket-workbench-details h3{margin-top:18px}
+.ticket-workbench-details form{display:grid;gap:14px;margin-top:22px}
+.ticket-workbench-details form label{display:grid;gap:6px;min-width:0}
+.ticket-workbench-details input,.ticket-workbench-details select,.ticket-workbench-details textarea{width:100%;min-width:0}
+.ticket-workbench-details .row{flex-wrap:wrap}
+.ticket-workbench .ticket-thread-panel{position:relative;inset:auto;top:auto;width:100%;height:100%;min-height:0;max-height:none;border:0;z-index:auto;background:var(--navigation)}
+.ticket-workbench .ticket-thread-panel .chat-panel.embedded-chat{position:relative;top:0;height:100%;max-height:none;min-height:0;margin:0}
+.ticket-workbench .panel-resize-handle{display:block;background:var(--canvas)}
+.ticket-workbench .chat-heading h2{max-height:none;font-size:12px}
+@media(max-width:760px){.ticket-workbench-columns{grid-template-columns:minmax(0,1fr);height:auto;min-height:0}.ticket-workbench-details{max-height:45dvh;height:auto}.ticket-workbench .panel-resize-handle{display:none}.ticket-workbench .ticket-thread-panel{height:80dvh;min-height:400px;border-top:1px solid var(--border)}}
+.task-progress-list>#objective-tasks:has(.ticket-workbench){padding-top:0;padding-bottom:0}
+.ticket-workbench-columns{height:100dvh;min-height:0;overflow:hidden}
+.ticket-workbench-details{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.ticket-workbench-heading{padding-top:0;padding-bottom:5px;min-height:29px;flex-shrink:0}
+.ticket-detail-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.ticket-workbench-columns>.panel-resize-handle{height:100%;align-self:stretch}
+.ticket-workbench .ticket-thread-panel .chat-panel.embedded-chat .chat-heading{padding-top:4px;padding-bottom:4px;min-height:0}
+.ticket-workbench .ticket-thread-panel .chat-heading h2{margin:0;line-height:1.4}
+.ticket-workbench.chat-first-console .ticket-thread-panel .embedded-chat .chat-composer{margin-bottom:0}
+.ticket-workbench .ticket-record-body{padding-bottom:0}
+@media(max-width:760px){.ticket-workbench-columns{height:auto;overflow:visible}.ticket-detail-scroll{max-height:45dvh}.ticket-workbench .ticket-thread-panel{height:85dvh}}
+
+/* Use the same gutters in both panels instead of inherited full-chat spacing. */
+.ticket-workbench{--ticket-gutter:14px}
+.ticket-workbench .ticket-workbench-heading{height:34px;min-height:34px;padding:0 var(--ticket-gutter);margin:0;align-items:center;background:var(--surface)}
+.ticket-workbench .ticket-workbench-heading>.text-button{font-size:12px;line-height:1.4;min-height:0}
+.ticket-workbench .ticket-thread-panel .chat-panel.embedded-chat .chat-heading{height:34px;min-height:34px;padding:0 var(--ticket-gutter);gap:8px;align-items:center;border-bottom:1px solid var(--border)}
+.ticket-workbench .ticket-thread-panel .chat-heading h2{font-size:12px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ticket-workbench .ticket-thread-panel .chat-heading>div>span{margin-top:0;font-size:10px}
+.ticket-workbench .ticket-record-header{padding:14px var(--ticket-gutter)}
+.ticket-workbench .ticket-record-toolbar{padding:0 var(--ticket-gutter)}
+.ticket-workbench .ticket-record-body{padding:14px var(--ticket-gutter) 0}
+.ticket-workbench.chat-first-console .embedded-chat .chat-messages{padding:14px var(--ticket-gutter) var(--chat-composer-space,140px);scroll-padding-bottom:var(--chat-composer-space,140px)}
+.ticket-workbench.chat-first-console .embedded-chat .chat-message.human{margin:0 0 16px;padding:10px 12px;border-radius:12px}
+.ticket-workbench.chat-first-console .ticket-thread-panel .embedded-chat .chat-composer{margin:0 var(--ticket-gutter);padding:0;width:auto}
+.ticket-workbench.chat-first-console .embedded-chat .chat-input-wrap{border-radius:14px}
+.ticket-workbench.chat-first-console .embedded-chat .chat-input-wrap textarea{min-height:44px;max-height:160px;padding:10px 48px 10px 12px;border-radius:14px;line-height:1.5}
+.ticket-workbench.chat-first-console .embedded-chat .chat-send{right:7px;bottom:6px}
+.ticket-workbench.chat-first-console .embedded-chat .chat-composer>small{margin:5px 0 0;font-size:9px;line-height:1.4}
+.ticket-workbench.chat-first-console .embedded-chat .chat-refs:empty{display:none}
+.ticket-workbench .ticket-workbench-heading,.ticket-workbench .ticket-thread-panel .chat-panel.embedded-chat .chat-heading{height:var(--tasks-header-height,76px);min-height:var(--tasks-header-height,76px);padding:22px var(--ticket-gutter) 18px;box-sizing:border-box;align-items:center;background:var(--canvas)}
+.ticket-workbench .ticket-workbench-heading>.text-button{font-size:13px}
+.ticket-workbench .ticket-thread-panel .chat-heading h2{font-size:13px}
+.ticket-workbench.chat-first-console .ticket-thread-panel .embedded-chat .chat-composer{margin-bottom:max(16px,env(safe-area-inset-bottom))}
+.ticket-workbench-details>.task-tickets-heading{flex-shrink:0}
+.ticket-list-scroll{flex:1;min-height:0;width:100%;overflow-y:auto;overscroll-behavior:contain}
+.ticket-list-scroll>div{width:100%;min-width:0}

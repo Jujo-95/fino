@@ -1,0 +1,68 @@
+/* Continuous team workspace, with contacts separate from conversation history. */
+main:has(.chat-first-console)>.page{padding:0;max-width:none;margin:0}
+.chat-first-console .team-conversations{display:grid;grid-template-columns:230px minmax(0,1fr);gap:0;height:100dvh;align-items:stretch}
+.team-conversations>.conversation-roster{position:static;display:block;max-height:none;height:100%;overflow-y:auto;border:0;border-right:1px solid var(--border);border-radius:0;box-shadow:none;background:#f8f9fc;padding:0 10px}
+.team-section-label{font-size:10px;font-weight:550;color:#8b94a4;letter-spacing:.04em;padding:20px 4px 12px}
+.agent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.agent-contact{position:relative;border:1px solid transparent;border-radius:7px;min-width:0}
+.agent-contact.selected{background:#eaf0fc;border-color:#dce5f9}
+.agent-filter{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 1px 8px;width:100%;border:0;background:none;min-width:0;border-radius:7px}
+.agent-filter:hover{background:#edf0f7}
+.agent-filter .illustrated-avatar{height:30px;width:30px}
+.agent-filter>span{font-size:9px;font-weight:500;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;color:#748099}
+.selected .agent-filter>span{color:#4664a6}
+.agent-new{position:absolute;right:1px;top:1px;width:19px;height:19px;border:0;background:#f8f9fc;color:#8796b2;border-radius:50%;display:grid;place-items:center;padding:0}
+.agent-new:hover{background:#dfe7f8;color:#3657a8}
+.conversation-section-heading{display:flex;align-items:center;justify-content:space-between;padding:22px 4px 8px;gap:5px}
+.conversation-collapse{display:flex;align-items:center;gap:6px;border:0;background:none;color:#8b94a4;font-size:10px;font-weight:500;padding:0;min-height:26px}
+.conversation-collapse[aria-expanded=false]>svg{transform:rotate(-90deg)}
+.conversation-section-heading .archived-toggle{font-size:9px;padding:5px 0;border:0;background:none;color:#9aa3b3}
+.conversation-section-heading .archived-toggle[aria-pressed=true]{color:#526dae}
+.conversation-roster .conversation-scroll{--conversation-height:34px;max-height:calc(4 * var(--conversation-height));scrollbar-gutter:auto}
+.conversation-row{position:relative;border-radius:5px}
+.conversation-row>.roster-conversation{align-items:center;gap:7px;padding:5px 6px;font-size:10px;line-height:1.3}
+.conversation-row .illustrated-avatar{height:20px;width:20px;flex-shrink:0}
+.conversation-row .roster-conversation>span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conversation-row time{width:28px;text-align:right;flex-shrink:0;font-size:9px;color:#9aa4b7;white-space:nowrap}
+.conversation-row>.conversation-archive{position:absolute;right:3px;width:26px;height:26px;opacity:0;pointer-events:none}
+.conversation-row:hover>.conversation-archive,.conversation-row:focus-within>.conversation-archive{opacity:1;pointer-events:auto}
+.conversation-row:hover time,.conversation-row:focus-within time{opacity:0}
+.team-conversations>.agent-chat-workspace{border:0;border-radius:0;box-shadow:none;height:100%;min-height:0}
+.chat-first-console .agent-chat-workspace .embedded-chat{display:grid;grid-template-rows:auto minmax(0,1fr);height:100%;min-height:0;max-height:none;border-radius:0}
+.chat-first-console .agent-chat-workspace .embedded-chat[hidden]{display:none}
+.chat-first-console .embedded-chat .chat-heading{grid-row:1;padding:14px 24px;min-height:52px;gap:12px}
+.chat-first-console .embedded-chat .chat-heading h2{font-size:12px;font-weight:500;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.chat-first-console .embedded-chat .chat-heading span{font-size:10px;display:block;margin-top:4px}
+.chat-first-console .agent-evidence-toggle{font-size:10px;padding:4px 0}
+.chat-first-console .embedded-chat .chat-messages{grid-area:2/1;padding:24px 32px 160px;scroll-padding-bottom:160px}
+.chat-first-console .embedded-chat .chat-composer{grid-area:2/1;align-self:end;position:relative;z-index:2;background:transparent;border:0;border-radius:0;padding:0;margin:12px 24px 16px;pointer-events:none}
+.chat-first-console .embedded-chat .chat-composer>*{pointer-events:auto}
+.chat-first-console .embedded-chat .chat-input-wrap textarea{display:block;background:#fff;box-shadow:0 3px 14px #17263908;min-height:80px}
+.chat-first-console .embedded-chat .chat-composer>small{background:white;display:table;padding:2px 4px;border-radius:3px}
+.chat-first-console .agent-evidence-view{height:100%;min-height:0}
+@media(hover:none){.conversation-row>.conversation-archive{opacity:1;pointer-events:auto;width:23px}.conversation-row time{margin-right:22px}}
+@media(max-width:760px){
+  .chat-first-console .team-conversations{display:flex;flex-direction:column;gap:0;height:auto;min-height:calc(100dvh - 70px)}
+  .team-conversations>.conversation-roster{width:100%;height:auto;max-height:none;overflow:visible;border-right:0;border-bottom:1px solid var(--border);padding:0 12px 8px}
+  .team-section-label{padding-top:12px;padding-bottom:6px}
+  .agent-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:3px}
+  .agent-filter{padding:7px 0;gap:5px}
+  .agent-filter .illustrated-avatar{width:26px;height:26px}
+  .agent-filter>span{font-size:8px}
+  .agent-new{width:17px;height:17px;top:0;right:0}
+  .conversation-section-heading{padding-top:8px;padding-bottom:3px}
+  .team-conversations>.agent-chat-workspace{height:76dvh;min-height:450px}
+  .chat-first-console .embedded-chat .chat-heading{padding:12px 16px;min-height:48px}
+  .chat-first-console .embedded-chat .chat-messages{padding:18px 16px 145px}
+  .chat-first-console .embedded-chat .chat-composer{margin:8px 12px 12px}
+}
+.team-generation{display:flex;align-items:center;justify-content:space-between;padding-right:4px}
+.team-generation select{border:0;background:transparent;color:#7c869a;font-size:10px;padding:5px 2px;max-width:85px;min-height:30px}
+.agent-grid:has(.agent-contact:nth-child(7)){max-height:290px;overflow-y:auto;scrollbar-width:thin;padding-right:2px}
+.v2-evidence{padding:22px;font-size:12px;color:#737b88;line-height:1.7}
+.v2-evidence h3{color:#424b59;font-size:15px;margin-bottom:10px}
+.v2-evidence p{margin-bottom:14px}
+.v2-evidence details{margin:10px 0;padding:10px 0;border-top:1px solid #e5e7eb}
+.v2-evidence summary{cursor:pointer}
+.v2-evidence pre{max-height:300px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px}
+@media(max-width:760px){.agent-grid:has(.agent-contact:nth-child(7)){max-height:135px;grid-template-columns:repeat(6,minmax(0,1fr))}}

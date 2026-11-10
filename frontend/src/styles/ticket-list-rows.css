@@ -1,0 +1,35 @@
+.tasks-feed .ticket-list-row{display:block;position:relative;padding:13px 14px 12px;border-bottom:1px solid var(--border);background:var(--surface)}
+.task-progress-list #objective-tasks .ticket-list-row{padding:13px 14px 12px}
+.tasks-feed .ticket-list-row:hover{background:var(--accent-soft)}
+.tasks-feed .ticket-list-row[data-next-step=true],.tasks-feed .ticket-list-row.thread-selected{background:var(--accent-soft);box-shadow:inset 3px 0 var(--accent)}
+.tasks-feed .ticket-list-row[data-next-step=true]:hover{background:var(--accent-soft)}
+.tasks-feed .task-row:hover,.tasks-feed .task-row[data-blocked=true]:hover{background:var(--accent-soft)}
+.tasks-feed .ticket-list-row[data-next-step=true]{background:var(--accent-soft)}
+.tasks-feed .ticket-list-row .task-row-heading{width:100%;min-width:0;display:flex;align-items:flex-start;gap:14px;margin:0;padding:0;text-align:left}
+.ticket-list-row .task-row-heading .task-copy{display:block;min-width:0}
+.ticket-list-row .task-row-heading strong{font-size:14px;line-height:1.5;font-weight:550;color:var(--ink)}
+.ticket-list-row .task-row-heading time{margin-left:auto;flex-shrink:0;padding-top:2px;font-size:11px;font-weight:400;color:var(--muted)}
+.ticket-list-row .task-row-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px}
+.ticket-list-row .task-identity{display:flex;align-items:center;gap:8px;min-width:0;padding:0;background:transparent;border:0;color:var(--muted);font-size:11px;font-weight:550;cursor:pointer}
+.ticket-list-row .task-identity .task-check{color:#8c9bb0}
+.ticket-list-row .task-row-footer .task-row-actions{width:auto;margin:0;padding:0;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px}
+.task-progress-list #objective-tasks .ticket-list-row .task-row-actions{margin-left:0;padding:0;width:auto}
+.ticket-list-row .task-row-actions .task-status{display:inline-block;padding:3px 8px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font-size:10px;font-weight:550;white-space:nowrap}
+.ticket-list-row[data-state=monitoring] .task-status,.ticket-list-row[data-blocked=true] .task-status,.ticket-list-row[data-state=dismissed] .task-status{background:var(--navigation);color:var(--muted)}
+.ticket-list-row .task-priority-icon{display:grid;place-items:center;width:20px;height:20px;border:1px solid #aab5c5;border-radius:50%;color:var(--muted)}
+.ticket-list-row .task-team{padding-left:3px}.ticket-list-row .task-team>span{margin-left:-3px;border:2px solid var(--surface)}
+.ticket-list-row .task-team .agent-avatar{width:24px;height:24px;min-width:24px}
+.ticket-list-row .compact-ticket-chat{min-height:26px;padding:3px 6px;border:0;background:transparent;color:var(--accent);gap:5px;box-shadow:none;font-size:11px}
+.ticket-list-row .compact-ticket-chat:not(.task-chat-primary)>span{display:none}
+.ticket-list-row .compact-ticket-chat small{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:50%;padding:0 4px;background:var(--accent-soft);color:var(--accent);font-size:10px}
+.ticket-list-row .compact-ticket-chat.task-chat-primary small{background:#ffffff26;color:white}
+.ticket-list-row .task-chat-primary{border-radius:5px}
+
+.ticket-list-row[data-blocked=true] .task-row-heading strong{color:#929aa5}
+.tasks-feed .ticket-list-row[data-complete=true] .task-check{background:transparent;box-shadow:none;border-radius:0;color:var(--muted);width:20px;height:20px;flex-basis:20px;margin:0}
+.tasks-feed .ticket-list-row[data-complete=true] .task-check svg{width:14px;height:14px}
+.tasks-feed .ticket-list-row[data-complete=true] .task-row-heading strong{text-decoration:line-through;color:var(--muted)}
+.ticket-list-row[data-complete=true] .task-row-actions .task-status,.ticket-list-row[data-complete=true] .compact-ticket-chat small{background:var(--navigation);color:var(--muted)}
+.ticket-list-row[data-complete=true] .compact-ticket-chat,.ticket-list-row[data-complete=true] .task-identity,.ticket-list-row[data-complete=true] .task-priority-icon{color:var(--muted)}
+.ticket-list-row[data-complete=true] .task-team{filter:grayscale(1);opacity:.65}
+@media(max-width:600px){.ticket-list-row .task-row-footer{gap:6px}.ticket-list-row .task-row-footer .task-row-actions{gap:5px}.ticket-list-row .next-step-chip{font-size:9px;padding:2px 5px}}

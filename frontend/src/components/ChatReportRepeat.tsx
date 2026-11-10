@@ -1,0 +1,4 @@
+import type {RepeatPrompt} from './ReportRepeatDialog';
+export function ChatReportRepeat({prompt,busy,onDecision,onOpen}:{prompt:RepeatPrompt;busy:boolean;onDecision:(decision:'approve'|'reject')=>void;onOpen?:(id:string)=>void}){
+  return <section className="chat-plan" aria-label="Confirmar nuevo informe"><h3>{prompt.message}</h3><p>El informe existente se conservará. Confirma antes de iniciar otro análisis.</p>{onOpen&&<button className="text-button" onClick={()=>onOpen(prompt.existing_run_id)}>Ver informe existente</button>}<div className="chat-plan-actions"><button className="primary" disabled={busy} onClick={()=>onDecision('approve')}>Crear nuevamente</button><button className="secondary" disabled={busy} onClick={()=>onDecision('reject')}>Conservar existente</button></div></section>;
+}

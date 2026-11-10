@@ -1,0 +1,14 @@
+import type {AuditTrace,AuditFinding} from '../auditTypes';
+import {ticketTitle,severityLabels,metricLabels} from '../presentation';
+import {excerpt} from './Disclosure';
+const rank:Record<string,number>={CRITICAL:0,HIGH:1,MEDIUM:2,LOW:3};
+export function priorityFindings(findings:AuditFinding[]){return [...findings].sort((a,b)=>(rank[a.severity]??4)-(rank[b.severity]??4));}
+export function AgentSummary({trace,traces,orchestrator,onDetails,onReport}:{trace:AuditTrace;traces:AuditTrace[];orchestrator:boolean;onDetails:()=>void;onReport:()=>void}){
+  const consolidated=trace.node==='synthesize';
+  const findings=orchestrator&&!consolidated?traces.filter(t=>!['synthesize','ingest_and_profile'].includes(t.node)).flatMap(t=>t.findings):trace.findings;
+  const sorted=priorityFindings(findings);const urgent=sorted.filter(f=>['CRITICAL','HIGH'].includes(f.severity));
+  const missing=orchestrator?traces.filter(t=>t.node!=='ingest_and_profile'&&t.node!=='synthesize').flatMap(t=>t.metrics.filter(m=>m.value===null)):trace.metrics.filter(m=>m.value===null);
+  const limits=[...new Set(missing.map(m=>metricLabels[m.key]||m.label))];
+  const text=trace.llm_output||trace.rationale.join(' ');
+  return <div className="agent-summary"><div className="summary-heading"><h3>{orchestrator?'Síntesis del equipo':'Conclusiones'}</h3><span>{findings.length} hallazgos{orchestrator&&!consolidated?' · parcial':''}</span></div>{urgent.length>0&&<p className="priority-notice">{urgent.length} {urgent.length===1?'hallazgo de prioridad alta o crítica requiere':'hallazgos de prioridad alta o crítica requieren'} revisión.</p>}{sorted.length?<ol className="executive-findings">{sorted.slice(0,2).map((f,i)=><li key={i}><span className={'summary-severity '+f.severity}>{severityLabels[f.severity]||f.severity}</span><h4>{ticketTitle(f)}</h4></li>)}</ol>:<p className="summary-copy">{orchestrator&&!consolidated?'La consolidación está pendiente. Los aportes completados se conservan en cada especialista.':trace.node==='ingest_and_profile'?'Datos preparados.':'No se registraron hallazgos en esta etapa.'}</p>}{!sorted.length&&text&&trace.node!=='ingest_and_profile'&&<p className="summary-extract"><span>Extracto del aporte</span>{excerpt(text,320)}</p>}{sorted[0]&&<div className="next-action"><h4>Acción recomendada{sorted[0].recommended_action.length>260?' · extracto':''}</h4><p>{excerpt(sorted[0].recommended_action,260)}</p></div>}{limits.length>0&&<p className="summary-limitation"><strong>Limitación:</strong> sin datos para {limits.join(', ')}.</p>}<div className="summary-actions"><button className="text-button" onClick={onDetails}>Ver {findings.length>2?`los ${findings.length} hallazgos y detalles`:'aporte y explicación completos'}</button>{orchestrator&&<button className="secondary" onClick={onReport}>Ver informe completo</button>}</div></div>;
+}

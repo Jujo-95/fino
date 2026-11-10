@@ -1,0 +1,54 @@
+.ticket-workbench-details .ticket-record,.ticket-modal .ticket-record{padding:0;background:var(--canvas);min-height:100%}
+.ticket-record-header{padding:18px 18px 14px;background:var(--surface);border-bottom:1px solid var(--border)}
+.ticket-record-title{display:flex;align-items:flex-start;gap:10px}
+.ticket-record .ticket-record-title h2{margin:0;flex:1;font-size:18px;font-weight:600;line-height:1.4;letter-spacing:-.25px}
+.ticket-record-title .icon-button{padding:2px;flex-shrink:0}
+.ticket-record-meta{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:10px;color:var(--muted);font-size:11px}
+.ticket-record-meta>span+span::before{content:'·';margin-right:7px;color:#a1a9b5}
+.ticket-record-status{color:var(--ink)}
+.ticket-record-byline{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:12px;color:var(--muted);font-size:10px}
+.ticket-record-byline .ticket-contributors{margin:0;padding:0}.ticket-record-byline .ticket-contributors>small{display:none}.ticket-record-byline .agent-avatar{width:24px;height:24px}
+.ticket-record-toolbar{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-bottom:1px solid var(--border);padding:0 18px}
+.ticket-record-tabs{display:flex;align-items:center;gap:20px}
+.ticket-record-tabs>button{border:0;border-bottom:2px solid transparent;border-radius:0;padding:13px 0;background:transparent;font-size:12px;font-weight:550;color:var(--muted);cursor:pointer}
+.ticket-record-tabs>button[aria-selected=true]{border-color:var(--accent);color:var(--accent)}
+.ticket-record-chat{display:flex;align-items:center;gap:5px;border:0;background:transparent;padding:5px;color:var(--accent);font-size:11px;cursor:pointer}
+.ticket-record-body{padding:16px}
+.ticket-record .ticket-note-editor{display:block;margin:0 0 18px;border:1px solid var(--border);border-radius:9px;background:var(--surface);overflow:hidden;box-shadow:0 2px 7px #17263906}
+.ticket-record .ticket-note-editor>textarea{display:block;width:100%;min-height:112px;resize:vertical;border:0;border-radius:0;background:transparent;padding:14px;font-size:13px;line-height:1.6;box-shadow:none;outline-offset:-2px}
+.ticket-record .ticket-note-editor>footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0;padding:10px;border-top:1px solid var(--border)}
+.ticket-record .ticket-note-editor footer>label{flex:1;min-width:0}
+.ticket-record .ticket-note-editor select{padding:7px 4px;font-size:11px;border:0;background:transparent;color:var(--muted);max-width:100%}
+.ticket-record .ticket-note-editor footer>.primary{min-height:33px;padding:6px 10px;font-size:11px}
+.ticket-record .ticket-note-editor>label:not(.sr-only),.ticket-record .ticket-note-editor>small,.ticket-record .ticket-note-editor>.error{display:block;margin:10px;font-size:12px}
+.ticket-note-saved{margin:-6px 0 14px;color:#29835e;font-size:12px}
+.ticket-activity{display:grid;gap:12px}
+.ticket-activity-entry{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);padding:14px}
+.ticket-activity-icon{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border-radius:50%;background:var(--navigation);color:var(--muted)}
+.ticket-activity-entry>div{flex:1;min-width:0}
+.ticket-activity-entry header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.ticket-activity-entry strong{font-size:12px;font-weight:600}
+.ticket-activity-entry time{color:var(--muted);font-size:10px}
+.ticket-activity-entry p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.65}
+.ticket-activity-empty{font-size:12px;color:var(--muted);padding:4px 0}
+.ticket-record-body .ticket-narrative h3{margin:0 0 8px;font-size:13px}
+.ticket-record-body .ticket-narrative p{font-size:13px;margin-bottom:16px}
+.ticket-record-body .ticket-narrative{display:grid;gap:10px;margin-bottom:16px}
+.ticket-context-block,.ticket-action-block{padding:13px 14px;border:1px solid var(--border);border-radius:7px;background:var(--surface)}
+.ticket-record-body .ticket-narrative h3{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:550;color:var(--muted);margin:0 0 8px;letter-spacing:.01em}
+.ticket-record-body .ticket-narrative p{font-size:13px;line-height:1.65;margin:0;overflow-wrap:anywhere}
+.ticket-record-body .ticket-narrative p+p{margin-top:8px}
+.ticket-record-body .ticket-action-block{background:var(--accent-soft);border-color:#d5dff7;border-left:2px solid var(--accent)}
+.ticket-record-body .ticket-action-block h3{color:var(--accent)}
+.ticket-record-body .ticket-action-block .ticket-source-hint{font-size:12px;color:var(--muted);margin-top:9px}
+.ticket-record-body>.disclosure{margin:8px 0 0;border:1px solid var(--border);border-radius:7px;background:var(--surface)}
+.ticket-record-body>.disclosure>summary{display:flex;align-items:center;gap:9px;list-style:none;padding:11px 12px;font-size:12px;font-weight:500;line-height:1.4;color:var(--ink)}
+.ticket-record-body>.disclosure>summary::-webkit-details-marker{display:none}
+.ticket-record-body>.disclosure>summary>span{margin:0}
+.ticket-record-body .disclosure-icon{display:grid;place-items:center;flex-shrink:0;color:var(--muted)}
+.ticket-record-body .disclosure-chevron{margin-left:auto;color:var(--muted);transition:transform .15s}
+.ticket-record-body>.disclosure[open] .disclosure-chevron{transform:rotate(180deg);color:var(--accent)}
+.ticket-record-body>.disclosure[open]>summary{border-bottom:1px solid var(--border)}
+.ticket-record-body>.disclosure>.disclosure-content{padding:12px;font-size:12px;line-height:1.6}
+.ticket-record-body>.disclosure>summary:hover{background:var(--navigation)}
+@media(prefers-reduced-motion:reduce){.ticket-record-body .disclosure-chevron{transition:none}}

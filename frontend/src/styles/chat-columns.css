@@ -1,0 +1,59 @@
+/* Each chat measures and centers its content inside its own grid column. */
+.chat-first-console .team-conversations.with-ticket-thread>*{min-width:0}
+.chat-first-console .with-ticket-thread .chat-panel.embedded-chat{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:auto minmax(0,1fr);
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  height:100%;
+  min-height:0;
+}
+.chat-first-console .with-ticket-thread .embedded-chat .chat-heading{
+  grid-area:1/1;
+  min-width:0;
+  overflow:hidden;
+}
+.chat-first-console .with-ticket-thread .embedded-chat .chat-heading>div{min-width:0}
+.chat-first-console .with-ticket-thread .chat-panel.embedded-chat[hidden]{display:none}
+.chat-first-console .with-ticket-thread .embedded-chat .chat-messages{
+  grid-area:2/1;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  overflow-x:hidden;
+  padding:24px max(20px,calc((100% - 620px)/2)) var(--chat-composer-space,190px);
+  scroll-padding-bottom:var(--chat-composer-space,190px);
+}
+.chat-first-console .with-ticket-thread .embedded-chat .chat-message{min-width:0;max-width:100%}
+.chat-first-console .with-ticket-thread .embedded-chat .chat-message.human{max-width:100%;width:100%;margin-left:0;margin-right:0}
+.chat-first-console .with-ticket-thread .embedded-chat .chat-composer{
+  grid-area:2/1;
+  align-self:end;
+  justify-self:stretch;
+  position:relative;
+  inset:auto;
+  width:auto;
+  min-width:0;
+  max-width:none;
+  margin:12px max(16px,calc((100% - 660px)/2)) 16px;
+  padding:0;
+  z-index:2;
+}
+.chat-first-console .with-ticket-thread .embedded-chat .chat-input-wrap{min-width:0;max-width:100%}
+.chat-first-console .with-ticket-thread .embedded-chat .chat-input-wrap textarea{width:100%;min-width:0}
+@media(max-width:820px){
+  .chat-first-console .with-ticket-thread .embedded-chat .chat-messages{padding-left:16px;padding-right:16px}
+  .chat-first-console .with-ticket-thread .embedded-chat .chat-composer{margin:10px 12px max(12px,env(safe-area-inset-bottom))}
+}
+
+.chat-first-console .embedded-chat .chat-thread-trace .task-chat-button{margin-top:10px;background:transparent;font-size:12px}
+
+.chat-first-console .embedded-chat .chat-message.human p,.chat-first-console .embedded-chat .chat-message.human strong,.chat-first-console .embedded-chat .chat-message.human li{color:inherit}
+.chat-first-console .embedded-chat .chat-message.human a{color:#244dbf;text-decoration:underline}
+.chat-first-console .embedded-chat .chat-message.human code{background:#244dbf0a;color:#111}
+.chat-first-console .embedded-chat .chat-message.human .ticket-reference{background:#244dbf0d;color:#244dbf}
+.chat-first-console .embedded-chat .chat-thread-trace .task-chat-button{color:#244dbf;border-color:#244dbf40;background:transparent}
+.chat-first-console .embedded-chat .chat-thread-trace .task-chat-button:hover{background:#244dbf0a}
+.chat-first-console .embedded-chat .chat-thread-trace .task-chat-button small{color:var(--muted)}

@@ -1,0 +1,6 @@
+.chat-read-marker{display:block;width:1px;height:1px;pointer-events:none}
+.task-chat-button.has-unread{color:var(--accent);background:#edf2ff;border-color:#bdcafa;font-weight:600}
+.chat-unread-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 4px;border-radius:10px;background:var(--accent);color:white!important;font-size:10px!important}
+.ticket-needs-attention{display:inline-flex;color:#a36622;align-items:center}.ticket-attention-slot:empty{display:none}
+.conversation-unread{display:block;width:7px;height:7px;flex:0 0 7px;background:var(--accent);border-radius:50%}
+.roster-conversation:has(.conversation-unread)>span{font-weight:600;color:var(--ink)}

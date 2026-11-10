@@ -1,0 +1,7 @@
+import {useState} from 'react';
+import {api} from '../api';
+export function SupportingEvidence({clientId,onChanged}:{clientId:string;onChanged:()=>void}){
+  const [file,setFile]=useState<File|null>(null);const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');
+  async function upload(e:React.FormEvent){e.preventDefault();if(!file)return;setBusy(true);setMessage('');try{if(file.size>2*1024*1024)throw Error('El archivo supera 2 MB.');const body=JSON.parse(await file.text());await api(`/clients/${clientId}/consulting/supporting-data`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});setMessage('Evidencia importada. El diagnóstico comprobará su alcance y fechas.');onChanged()}catch(e){setMessage((e as Error).message)}finally{setBusy(false)}}
+  return <details className="consult-details"><summary>Añadir evidencia de uso o compromisos</summary><p>Opcional: un responsable técnico puede importar métricas por recurso y día o términos de contratos en el formato de integración documentado. La app verifica identidad y fechas; una fila aislada no habilita recomendaciones.</p><form onSubmit={upload}><label>Archivo de evidencia · JSON<input aria-label="Archivo de evidencia complementaria" type="file" accept=".json,application/json" onChange={e=>setFile(e.target.files?.[0]||null)}/></label><button className="secondary" disabled={busy||!file}>{busy?'Validando…':'Importar evidencia'}</button></form>{message&&<p role="status">{message}</p>}</details>;
+}

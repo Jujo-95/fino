@@ -1,0 +1,11 @@
+import type {TaskProgress} from './progressTypes';
+export type Requirement={id:string;capability:string;question:string;reason:string;status:string};
+export type ContextProposal={proposal_id:string;client_id:string;status:string;reason:string;values:Record<string,unknown>};
+export type Capability={key:string;title:string;state:string;reason:string;missing_requirements:string[];ticket_ids:string[];phase:string};
+export type ActionDetails={action_type:string;owner:string|null;steps:string[];dependencies:string[];risk:string|null;approval_required:boolean;completion_criterion:string|null};
+export type AgendaAction=ActionDetails&{ticket_id:string;title:string;blocked_by:string[];ready:boolean;reason:string};
+export type Verification={verification_id:string;ticket_id:string;status:string;reason?:string;effective_date:string;observed_daily_reduction?:number;limitations:string};
+export type MonitoringObservation={ticket_id:string;status:string;summary:string;observed_days:number;required_days:number;review_after:string};
+export type Consulting={diagnosis:{revision:string;evaluated_at:string;data_through:string|null;capabilities:Capability[];requirements:Requirement[];context:{revision:string;values:Record<string,unknown>};pending_proposals:ContextProposal[];facts:{accounts:string[];allocation:{owned_cost_pct:number|null;tagged_cost_pct:number|null}}};agenda:{progress?:TaskProgress;monitoring?:MonitoringObservation[];top_actions:AgendaAction[];actions:AgendaAction[];next_requirement:Requirement|null;revision:string};verifications:Verification[]};
+export const stateLabels:Record<string,string>={INSUFFICIENT_DATA:'Falta información',ASSESSABLE:'Podemos investigar',ATTENTION_REQUIRED:'Requiere atención',FOLLOW_UP:'En seguimiento',NO_ISSUES_DETECTED:'Sin problemas detectados',NOT_APPLICABLE:'No aplica'};
+export const verificationLabels:Record<string,string>={pending_data:'Esperando datos',inconclusive:'No concluyente',observed:'Reducción observada',no_improvement:'Sin reducción observada'};

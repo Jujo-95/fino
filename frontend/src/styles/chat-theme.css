@@ -1,0 +1,40 @@
+/* Shared application palette for the main chat and ticket threads. */
+.chat-first-console .embedded-chat{--chat-paper:var(--canvas);--chat-ink:var(--ink);--chat-muted:var(--muted);background:var(--chat-paper);color:var(--ink)}
+.chat-first-console .ticket-thread-panel{background:var(--canvas)}
+.chat-first-console .embedded-chat .chat-heading{background:var(--surface);border-bottom-color:var(--border)}
+.chat-first-console .embedded-chat .chat-heading h2,.chat-first-console .embedded-chat .agent-evidence-toggle{color:var(--muted)}
+.chat-first-console .embedded-chat .chat-message{color:var(--ink)}
+.chat-first-console .embedded-chat .chat-message.human{background:linear-gradient(#ffffff55,#ffffff55),var(--canvas);color:var(--ink);border-color:var(--accent)}
+.chat-first-console .embedded-chat .chat-message.human p,.chat-first-console .embedded-chat .chat-message.human strong,.chat-first-console .embedded-chat .chat-message.human li{color:inherit}
+.chat-first-console .embedded-chat .chat-message blockquote{border-color:var(--border);color:var(--muted)}
+.chat-first-console .embedded-chat .chat-message hr,.chat-first-console .embedded-chat .chat-table-scroll th,.chat-first-console .embedded-chat .chat-table-scroll td{border-color:var(--border)}
+.chat-first-console .embedded-chat .chat-message a,.chat-first-console .embedded-chat .chat-message.human a{color:var(--accent)}
+.chat-first-console .embedded-chat .chat-message code,.chat-first-console .embedded-chat .chat-activity pre{color:var(--ink);background:var(--navigation)}
+.chat-first-console .embedded-chat .chat-message pre{background:var(--navigation);border-color:var(--border)}
+.chat-first-console .embedded-chat .chat-message pre code{background:transparent}
+.chat-first-console .embedded-chat .inline-ticket,.chat-first-console .embedded-chat .ticket-reference,.chat-first-console .embedded-chat .chat-message.human .ticket-reference{background:var(--accent-soft);color:var(--accent)}
+.chat-first-console .embedded-chat .chat-input-wrap{background:var(--surface);border-color:var(--border);box-shadow:0 1px 3px #17263908}
+.chat-first-console .embedded-chat .chat-input-wrap textarea{background:transparent;color:var(--ink)}
+.chat-first-console .embedded-chat .chat-input-wrap textarea::placeholder{color:var(--muted)}
+.chat-first-console .embedded-chat .chat-input-wrap:focus-within{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 14%,transparent)}
+.chat-first-console .embedded-chat .chat-send{background:var(--accent);color:var(--surface)}
+.chat-first-console .embedded-chat .chat-send:hover:not(:disabled){background:color-mix(in srgb,var(--accent) 90%,#000)}
+.chat-first-console .embedded-chat .chat-send:disabled{opacity:.35}
+.chat-first-console .embedded-chat .chat-composer>small,.chat-first-console .embedded-chat .chat-welcome p{color:var(--muted)}
+.chat-first-console .embedded-chat .chat-welcome h3{color:var(--ink)}
+.chat-first-console .embedded-chat .chat-welcome>button{border-color:var(--border);color:var(--ink);background:var(--surface)}
+.chat-first-console .embedded-chat .chat-welcome>button:hover{background:var(--accent-soft);border-color:var(--accent)}
+.chat-first-console .embedded-chat .chat-plan{background:var(--surface);border-color:var(--border);color:var(--ink)}
+.chat-first-console .embedded-chat .chat-refs>span{background:var(--accent-soft);color:var(--accent)}
+.chat-first-console .embedded-chat .chat-refs button{color:var(--accent)}
+.chat-first-console .embedded-chat .chat-thread-trace .task-chat-button{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
+.chat-first-console .embedded-chat .chat-thread-trace .task-chat-button:hover{background:var(--accent-soft)}
+.chat-first-console .embedded-chat .chat-messages{scrollbar-color:#cbd2df transparent}
+.ticket-thread-panel .chat-messages{scroll-behavior:auto}
+.resolved-thread-notice{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--ink);box-shadow:0 1px 3px #17263908}
+.resolved-thread-notice>svg{color:var(--accent);margin-top:2px}
+.resolved-thread-notice>div{flex:1;min-width:160px}
+.resolved-thread-notice strong{font-size:13px;font-weight:550}
+.resolved-thread-notice p{margin:5px 0 3px;font-size:12px;color:var(--muted)}
+.resolved-thread-notice small{font-size:11px;color:var(--muted)}
+.resolved-thread-notice>.secondary{font-size:11px;min-height:32px;padding:6px 10px;align-self:center}

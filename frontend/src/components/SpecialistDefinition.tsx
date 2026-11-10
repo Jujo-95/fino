@@ -1,0 +1,8 @@
+import {ArrowLeft,ArrowUpRight} from 'lucide-react';
+import {chatAgents} from '../auditTypes';
+import skills from '../agentSkills.json';
+import {AgentAvatar} from './AgentAvatar';
+export function SpecialistDefinition({agentId,onBack,onAsk}:{agentId:string;onBack:()=>void;onAsk:(text:string)=>void}){
+  const agent=chatAgents.find(a=>a.key===agentId);if(!agent)return null;
+  return <div className="specialist-definition"><header className="chat-heading"><h2>Especialista</h2><button className="text-button" onClick={onBack}><ArrowLeft size={14}/> Volver a Fino</button></header><div className="specialist-definition-body"><AgentAvatar agent={agent.key}/><h2>{agent.name}</h2><p>{agent.role}</p><span className="specialist-domain">{agent.capability||'Consultoría FinOps'}</span><h3>Cómo trabaja contigo</h3><p>Fino puede consultarle cuando tu pregunta requiera esta especialidad. Recibe el contexto de tu consulta, revisa la evidencia disponible y devuelve sus conclusiones a Fino.</p><h3>Capacidades</h3><ul><li>Revisar datos e indicadores de su especialidad.</li><li>Comparar con análisis anteriores y comprobar hallazgos.</li><li>Identificar información pendiente y proponer el siguiente paso.</li></ul>{!!agent.use_case_ids?.length&&<details><summary>Casos de uso · {agent.use_case_ids.length}</summary><ul>{agent.use_case_ids.map(id=><li key={id}>{(skills as Record<string,string>)[String(id)]||`Caso ${id}`}</li>)}</ul></details>}<button className="secondary" onClick={()=>onAsk(`Fino, consulta al especialista de ${agent.name.toLowerCase()} y ayúdame a identificar qué debo revisar y cuál es el siguiente paso.`)}>Pedir ayuda a Fino <ArrowUpRight size={14}/></button></div></div>;
+}

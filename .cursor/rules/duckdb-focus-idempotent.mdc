@@ -1,0 +1,23 @@
+---
+description: DuckDB SQL guardrails, idempotent FOCUS CSV ingestion, mandatory partition filtering, and atomic transactions.
+globs: **/*.sql, backend/**/engine/*.py
+alwaysApply: false
+---
+
+# DuckDB & FOCUS Idempotent SQL Rules
+
+## Do
+- **Atomic Batch Ingestion**: Wrap every CSV ingestion or ledger update in an explicit transaction (`BEGIN TRANSACTION` ... `COMMIT` / `ROLLBACK`).
+- **Idempotent Partition Replacement**: Key billing rows by `(client_id, billing_period_start, charge_period_start, sub_account_id, resource_id, sku_id, charge_category)` or replace by `(client_id, source_file_hash)` so re-ingesting the same FOCUS CSV is a no-op.
+- **AST Validation (`sqlglot`)**: Validate every query before execution:
+  1. Read-only (`exp.Select` only; reject `DROP`, `DELETE`, `UPDATE`, `INSERT`, `COPY`).
+  2. Mandatory partition filter on `ChargePeriodStart` (`>=` and `<`).
+  3. Mandatory currency filter or grouping on `BillingCurrency`.
+- **FOCUS Metric Discipline**:
+  - Use `EffectiveCost` with `ChargeCategory = 'Usage'` for Anomaly, Forecasting, Budgeting, and Allocation.
+  - Use `EffectiveCost`, `ContractedCost`, `ListCost`, and `CommitmentDiscountStatus` for Rate Optimization.
+
+## Don't
+- Never aggregate `BilledCost` and `EffectiveCost` together.
+- Never execute unparameterized string-interpolated SQL (`f"SELECT ... {user_val}"`); use DuckDB `$param` bindings.
+- Never run `SELECT *` without `LIMIT`.

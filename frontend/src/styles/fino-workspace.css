@@ -1,0 +1,65 @@
+/* One conversational entry point. Specialists are discoverable reference profiles. */
+.fino-workspace .agent-list{display:flex;flex-direction:column;gap:2px;max-height:38dvh;overflow-y:auto;scrollbar-width:thin;padding-bottom:4px}
+.agent-list-row{display:flex;align-items:center;border-radius:7px;min-width:0}
+.agent-list-row.selected{background:#e8edf5}
+.agent-list-select{display:flex;align-items:center;gap:9px;min-width:0;flex:1;border:0;background:transparent;text-align:left;padding:9px 6px;border-radius:7px}
+.agent-list-select:hover{background:#e9edf3}
+.agent-list-select .illustrated-avatar{width:28px;height:28px;flex-shrink:0}
+.agent-list-select>span{flex:1;min-width:0}
+.agent-list-select strong{display:block;font-size:11px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.agent-list-select small{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+.agent-list-select>svg{color:#8b94a4}
+.agent-list-new{flex-shrink:0;width:27px;height:27px}
+.fino-workspace .conversation-section-heading{padding-top:15px}
+.specialist-definition{display:grid;grid-template-rows:auto minmax(0,1fr);height:100%;min-height:0;background:var(--navigation)}
+.specialist-definition-body{overflow-y:auto;padding:32px clamp(20px,6%,80px);font-size:14px;line-height:1.7;max-width:860px;width:100%;margin:0 auto}
+.specialist-definition-body>.illustrated-avatar{width:58px;height:58px;margin-bottom:16px}
+.specialist-definition-body h2{font-size:22px;margin-bottom:8px}
+.specialist-definition-body h3{margin-top:26px;margin-bottom:8px}
+.specialist-definition-body p,.specialist-definition-body ul{color:var(--muted)}
+.specialist-domain{display:inline-block;font-size:11px;color:var(--muted);margin-top:12px}
+.specialist-definition-body details{margin:24px 0;color:var(--muted)}
+.specialist-definition-body summary{cursor:pointer;font-size:12px}
+.specialist-definition-body>.secondary{margin-top:24px}
+.chat-first-console .fino-workspace{grid-template-columns:minmax(180px,min(var(--team-rail,260px),40%)) 6px minmax(0,1fr)}
+.chat-first-console .fino-workspace.with-ticket-thread{grid-template-columns:minmax(180px,min(var(--team-rail,260px),30%)) 6px minmax(0,1fr) 6px minmax(280px,min(var(--thread-width,420px),48%))}
+.fino-workspace>.conversation-roster{display:block;border-right:0}
+.panel-resize-handle{position:relative;cursor:col-resize;touch-action:none;background:var(--navigation);z-index:4;outline:0;min-height:0}
+.panel-resize-handle::after{content:'';position:absolute;inset:0 2px;background:var(--border);transition:background .15s}
+.panel-resize-handle:hover::after,.panel-resize-handle:focus-visible::after{background:var(--accent)}
+.resizing-panels,.resizing-panels *{cursor:col-resize!important;user-select:none!important}
+.resizing-panels iframe{pointer-events:none}
+.sidebar-collapse-row{display:flex;justify-content:flex-end;flex-shrink:0;margin:-18px 0 12px;min-height:22px}
+.sidebar-collapse-row .sidebar-collapse{color:var(--muted);width:22px;height:22px;min-width:22px;padding:5px;margin:0;background:transparent;border:0;border-radius:4px}
+.sidebar-collapse-row .sidebar-collapse:hover{background:#e5e9ef}
+.sidebar .brand{margin-bottom:24px}
+.nav-collapsed>.sidebar{width:68px;padding-left:10px;padding-right:10px}
+.nav-collapsed>main{margin-left:68px}
+.nav-collapsed .sidebar .brand{padding-left:8px;padding-right:0}
+.nav-collapsed .sidebar .brand>span,.nav-collapsed .sidebar nav :is(button,a)>span,.nav-collapsed .sidebar .sidebar-settings,.nav-collapsed .sidebar .sidebar-bottom{display:none}
+.nav-collapsed .sidebar nav :is(button,a){justify-content:center;padding:12px 0;gap:0;position:relative}
+.nav-collapsed .sidebar-collapse-row{justify-content:center}
+.nav-collapsed .sidebar .nav-progress{position:absolute;right:0;top:0;margin:0;width:10px}
+@media(max-width:1100px) and (min-width:821px){
+ .chat-first-console .fino-workspace.with-ticket-thread{grid-template-columns:minmax(0,1fr) 6px minmax(280px,min(var(--thread-width,420px),52%))}
+ .fino-workspace.with-ticket-thread>.conversation-roster,.fino-workspace.with-ticket-thread>.panel-resize-handle:first-of-type{display:none}
+}
+@media(min-width:1101px){.fino-workspace.with-ticket-thread>.conversation-roster{display:block}}
+@media(max-width:820px){
+ .panel-resize-handle{display:none}
+ .chat-first-console .fino-workspace{display:flex;flex-direction:column;height:auto}
+ .chat-first-console .fino-workspace.with-ticket-thread{display:block}
+ .fino-workspace>.conversation-roster{height:auto;max-height:none;border-bottom:1px solid var(--border);padding:0 12px 10px}
+ .fino-workspace .agent-list{max-height:160px}
+ .specialist-definition{min-height:70dvh}
+}
+@media(max-width:760px){
+ .sidebar-collapse-row{display:none}
+ .sidebar .brand{margin-bottom:0}
+ .nav-collapsed>.sidebar{width:100%;padding:12px 18px}
+ .nav-collapsed>main{margin-left:0}
+ .nav-collapsed .sidebar .brand>span,.nav-collapsed .sidebar nav :is(button,a)>span{display:initial}
+ .nav-collapsed .sidebar nav :is(button,a){justify-content:flex-start;padding:11px 12px;gap:11px}
+}
+
+.sidebar .brand .brand-mark{display:block;width:32px;height:32px;flex-shrink:0;border-radius:8px}

@@ -1,0 +1,13 @@
+import {useEffect,useState} from 'react';
+import {api} from '../api';
+type Source={configured:boolean;synthetic?:boolean;bucket?:string;last_sync?:{through:string;objects:number;ingested_rows:number};laboratory?:{days:number;through:string;total_days:number}};
+export function DataSource({clientId,onChanged,expanded=false}:{clientId:string;onChanged:()=>void;expanded?:boolean}){
+  const [source,setSource]=useState<Source|null>(null);const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');const [error,setError]=useState('');
+  useEffect(()=>{let current=true;void api<Source>(`/clients/${clientId}/source`).then(value=>{if(current)setSource(value)}).catch(()=>{if(current)setSource(null)});return()=>{current=false}},[clientId]);
+  async function act(advance:boolean){
+    setBusy(true);setError('');setMessage('');
+    try{const result=await api<{ingested_rows?:number;sync?:{ingested_rows:number}}>(`/clients/${clientId}/source/${advance?'advance':'sync'}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(advance?{expected_days:source?.laboratory?.days}:{})});setSource(await api<Source>(`/clients/${clientId}/source`));setMessage(`${result.sync?.ingested_rows??result.ingested_rows??0} registros nuevos importados.`);onChanged()}catch(e){setError((e as Error).message)}finally{setBusy(false)}
+  }
+  if(!source?.configured)return null;
+  return <details open={expanded} className="panel form-panel" style={{marginBottom:20}}><summary style={{cursor:'pointer',fontWeight:600,fontSize:14}}>{source.synthetic?'Datos de laboratorio':'Fuente de facturación conectada'}</summary><div style={{paddingTop:18}}><p className="policy-note">{source.synthetic?'Datos sintéticos reproducibles para probar hallazgos y su evolución. ':''}{source.last_sync?`Disponibles hasta ${source.last_sync.through} · ${source.last_sync.objects} particiones diarias.`:'La fuente está lista para importar.'}</p><div style={{display:'flex',gap:10,flexWrap:'wrap',marginTop:14}}><button type="button" className="secondary" disabled={busy} onClick={()=>void act(false)}>{busy?'Procesando…':'Importar días disponibles'}</button>{source.laboratory&&<button type="button" className="secondary" disabled={busy||source.laboratory.days>=source.laboratory.total_days} onClick={()=>void act(true)}>Simular el siguiente día</button>}</div>{message&&<p role="status" className="success">{message}</p>}{error&&<p role="alert" className="error">{error}</p>}<p className="policy-note">Importar datos no ejecuta el informe. Usa «Generar informe» cuando quieras analizar los cambios.</p></div></details>;
+}
