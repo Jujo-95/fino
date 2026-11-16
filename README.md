@@ -86,6 +86,6 @@ Provider credentials and customer workspaces are excluded from this repository. 
 - [Ticket lifecycle and verification](docs/30-TASK-LIFECYCLE.md)
 - [Synthetic data laboratory](docs/11-SYNTHETIC-S3-LAB.md)
 - [Production job considerations](docs/production-jobs.md)
-- [Technical documentation](docs/) and [developer instructions](AGENTS.md)
+- [Technical documentation](docs/)
 
 Some technical documents remain in Spanish; early specifications describe historical designs.

@@ -8,13 +8,13 @@ En el `.env` del backend:
 
 ```
 FINOPS_LLM_PROVIDER=gemini
-GOOGLE_CLOUD_PROJECT=museframe-ai-dev
+GOOGLE_CLOUD_PROJECT=your-google-cloud-project
 GOOGLE_CLOUD_LOCATION=global
 GEMINI_MODEL=gemini-3.6-flash
 GOOGLE_API_KEY=<clave local, nunca incluir en documentación>
 ```
 
-La clave creada para este piloto es `finops-gemini-local`, vinculada a `museframe-ai-runtime@museframe-ai-dev.iam.gserviceaccount.com` y restringida a `aiplatform.googleapis.com`. El archivo real tiene permisos 0600. El navegador, los prompts y los endpoints de configuración pública nunca reciben la clave. La cuenta de facturación del proyecto recibe el consumo; el saldo promocional no impone un límite automático de gasto.
+Usa una clave propia vinculada al proyecto de despliegue y restringida a `aiplatform.googleapis.com`. El archivo local debe tener permisos 0600. El navegador, los prompts y los endpoints de configuración pública nunca reciben la clave. La cuenta de facturación del proyecto recibe el consumo; el saldo promocional no impone un límite automático de gasto.
 
 El SDK usa el proyecto indicado y la clave vinculada, sin un token OAuth fijo que caduque. ADC sigue disponible para otras aplicaciones, pero no es la credencial elegida en este proveedor API key. Para cambiar de modelo edita GEMINI_MODEL y reinicia el backend. Para volver a NVIDIA cambia FINOPS_LLM_PROVIDER=nvidia; su configuración/llavero existentes permanecen disponibles. Las preferencias NVIDIA guardadas en runtime no sobrescriben la configuración Gemini.
 

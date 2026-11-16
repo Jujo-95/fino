@@ -37,3 +37,20 @@ service-account*.json
 htmlcov/
 coverage/
 .venv-*/
+
+# Personal development-agent configuration; retain locally, never publish
+AGENT.md
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+SKILL.md
+.cursor/
+.agents/
+.codex/
+.claude/
+.gemini/
+.mcp.json
+.github/copilot-instructions.md
+.github/instructions/
+skills/
+docs/04-IMPLEMENTATION-PLAYBOOK.md

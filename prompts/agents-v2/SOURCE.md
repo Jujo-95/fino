@@ -1,6 +1,6 @@
 # Imported agent definitions
 
-Source: /Users/juangarcia/Downloads/agents.zip
+Source: locally supplied agent-definition archive; personal filesystem location omitted.
 Archive SHA-256: 5d92eb6d351ca662a5c17fb25c0437634046b42f0346711bf5d9f1ed67ca3a42
 
 16 Markdown agent definitions retained verbatim in registry.json (source field).
