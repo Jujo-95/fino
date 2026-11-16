@@ -10,5 +10,6 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Check tracked content and reachable history
-        run: python3 scripts/check_repository_privacy.py --history
+      - name: Check current tracked content
+        # Historical cleanup was explicitly declined; audit it separately with --history.
+        run: python3 scripts/check_repository_privacy.py
